@@ -33,7 +33,7 @@
               >
             </li>
             <li>
-              <a href="index.php"
+              <a href="./product/add_product.php?"
                 ><img src="./assets/img/ico7.png" /><span>Add Product</span>
               </a>
             </li>
@@ -68,19 +68,30 @@
                 <th>Aksi</th>
               </tr>
             </thead>
-            <tbody id="product-list">
-              <td>1</td>
-              <td>hahahaa</td>
-              <td>hahahaa</td>
-              <td>hahahaa</td>
-              <td>hahahaa</td>
-              <td>
-                <div class="aksi-btn">
-                    <a class="edit-btn btn-color" href="#">Edit</a>
-                    <a class="remove-btn" href="#">Hapus</a>
-                </div>
-              </td>
-            </tbody>
+            <?php 
+            include './services/koneksi.php';
+            $sql = "SELECT * FROM product";
+            $result = $conn->query($sql);
+            if ($result->num_rows > 0) {
+              while($row = $result->fetch_assoc()) {
+                  echo "<tr>";
+                  echo "<td>" . $row["id"] . "</td>";
+                  echo "<td>" . $row["name_product"] . "</td>";
+                  echo "<td>" . $row["price"] . "</td>";
+                  echo "<td>" . $row["stock"] . "</td>";
+                  echo "<td>" . $row["type_product"] . "</td>";
+                  echo "<td>";
+                  echo '<div class="aksi-btn">';
+                  echo '<a class="edit-btn btn-color" href="./product/edit_product.php?id=' . $row["id"] . '">Edit</a>';
+                  echo '<a class="remove-btn" href="./services/hapus.php?id=' . $row["id"] . '">Hapus</a>';
+                  echo '</div>';
+                  echo "</td>";
+                  echo "</tr>";
+              }
+          } else {
+              echo "<tr><td colspan='6'>Tidak ada data</td></tr>";
+          }
+            ?>
           </table>
         </div>
       </div>

@@ -131,6 +131,11 @@ table th {
     color: #B5B7C0
 }
 
+.aksi-btn {
+    display: flex;
+    gap: 20px;
+}
+
 .edit-btn {
     display: inline-block;
     border-radius: 5px;
